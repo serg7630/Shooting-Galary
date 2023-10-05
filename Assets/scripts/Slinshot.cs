@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Slinshot : MonoBehaviour
 {
-    static public Slinshot S;
+   public static  Slinshot S;
 
     [SerializeField] GameObject projectPrefab;
 
@@ -12,7 +12,7 @@ public class Slinshot : MonoBehaviour
     public Vector3 _launcPos;
     [SerializeField] GameObject _projectile;
     public bool aiming=false;
-    public bool Mobileplatform=true;
+    public bool Mobileplatform=false;
 
     [SerializeField] private bool FireMobile;
 
@@ -20,7 +20,7 @@ public class Slinshot : MonoBehaviour
     public float velosityMult=5000;
     public float rechardTime;
 
-    [SerializeField] private ActiveButtobExplosion ABX;
+    //[SerializeField] private ActiveButtobExplosion ABX;
     [SerializeField] private Score _score;
 
     [SerializeField]
@@ -75,7 +75,7 @@ public class Slinshot : MonoBehaviour
         //RB.mass= RbMass;
         RB.AddForce(ProjectPosition.forward * velosityMult);
         _projectile.GetComponent<Saw>().GetScore = _score;
-        _projectile.GetComponent<Projectile>()._aBX = ABX;
+        //_projectile.GetComponent<Projectile>()._aBX = ABX;
         _projectile.GetComponent<Projectile>().SmokeActive();
         //ABX.Projectile = _projectile;
         //ABX.StartProjectile();

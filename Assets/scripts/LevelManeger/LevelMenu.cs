@@ -8,6 +8,9 @@ public class LevelMenu : MonoBehaviour
 
    public static  int LevelAvaileble;
 
+    public Sprite SpriteActiveScene;
+    public Sprite SpriteDontActiveScene;
+
     [SerializeField]  int AvailibleLevels;
 
     string KeyStringLevelsAvaileble = "KeyLevels";
@@ -17,7 +20,8 @@ public class LevelMenu : MonoBehaviour
     void Start()
     {
 
-         GetLevel = PlayerPrefs.GetInt(KeyStringLevelsAvaileble);
+        GetLevel = PlayerPrefs.GetInt(KeyStringLevelsAvaileble);
+        //GetLevel = 1;
         AvailibleLevels = 1;
         if (AvailibleLevels < GetLevel)
         {
@@ -36,14 +40,16 @@ public class LevelMenu : MonoBehaviour
             if (i<LevelAvaileble)
             {
                 transform.GetChild(i).GetComponent<Button>().interactable = true;
+                transform.GetChild(i).GetComponent<Image>().sprite = SpriteActiveScene;
                 MaxScene = transform.GetChild(i).gameObject.name;
                 //print(transform.GetChild(i));
             }
             else
             {
                 transform.GetChild(i).GetComponent<Button>().interactable = false;
+                transform.GetChild(i).GetComponent<Image>().sprite = SpriteDontActiveScene;
                 //print(transform.GetChild(i));
-                
+
                 //print(i);
             }
         }
@@ -75,5 +81,9 @@ public class LevelMenu : MonoBehaviour
     public void BackInMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+    public void resetScene()
+    {
+        PlayerPrefs.SetInt(KeyStringLevelsAvaileble, 1);
     }
 }

@@ -14,7 +14,7 @@ public class Score : MonoBehaviour
     public TMP_Text CountCastle;
     [SerializeField] int _fullCountCastle;
     [SerializeField]ManagerCastle MC;
-    
+
 
     [SerializeField] GameObject _enemyCastle;
     int Coins;
@@ -25,6 +25,9 @@ public class Score : MonoBehaviour
     public bool StopTank=false;
 
     bool deadCastle = false;
+
+    public bool there_are_tanks=false;
+    public bool there_are_Castle = false;
     void Start()
     {
         int activeScene = SceneManager.GetActiveScene().buildIndex;
@@ -33,8 +36,12 @@ public class Score : MonoBehaviour
             Debug.LogError("mainMenu");
         }
         //Coins = StaticValueShowAds.S.getCoin();
-        _fullCountCastle = CountCastleBric();
-        print(_fullCountCastle + "  full count bric start");
+        if (there_are_Castle)
+        {
+            _fullCountCastle = CountCastleBric();
+            print(_fullCountCastle + "  full count bric start");
+        }
+        
         SetCount();
         CountChild();
         ShowCoin();
@@ -45,6 +52,7 @@ public class Score : MonoBehaviour
     void SetCount()
     {
         int count = _tanks.Count;
+        if (!there_are_tanks) return;
         CountTanksText.text = count.ToString();
 
     }
@@ -56,6 +64,7 @@ public class Score : MonoBehaviour
     public void CountChild()
     {
         //print("CountChild");
+        if (!there_are_tanks) return;
         for (int i = 0; i < _tanks.Count; i++)
         {
 

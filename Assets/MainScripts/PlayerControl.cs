@@ -28,9 +28,9 @@ public class PlayerControl : MonoBehaviour
         {
             speedRotation = 0.5f;
             MobilePlatform = false;
-            Slinshot.S.Mobileplatform = false;
+            //Slinshot.S.Mobileplatform = false;
             mobileMoveButtom.SetActive(false);
-            Debug.LogError("isMobile");
+            Debug.LogError("DontisMobile");
         }
         if (S == null) S = this;
         Invoke("ChecEnabled", 1f);

@@ -6,7 +6,7 @@ public class StaticValueShowAds : MonoBehaviour
     static public StaticValueShowAds S;
     static public bool ShowAds;
     static public int ValForAds;
-    public GameObject PanelRevu;
+    //public GameObject PanelRevu;
 
     [Header("количесвто монет")]
     string CoinsPlayer = "Coins";
@@ -15,7 +15,7 @@ public class StaticValueShowAds : MonoBehaviour
     {
         if(S==null) S = this;
         _coins= PlayerPrefs.GetInt(CoinsPlayer);
-        Debug.LogError("start");
+        Debug.LogError("startScriptADS");
     }
 
 
@@ -32,14 +32,14 @@ public class StaticValueShowAds : MonoBehaviour
     {
         SceneManager.LoadScene("LevelsMenu");
     }
-    public void ShowReveu()
-    {
-        PanelRevu.SetActive(true);
-    }
-    public void HideReveu()
-    {
-        PanelRevu.SetActive(false);
-    }
+    //public void ShowReveu()
+    //{
+    //    PanelRevu.SetActive(true);
+    //}
+    //public void HideReveu()
+    //{
+    //    PanelRevu.SetActive(false);
+    //}
     void Update()
     {
         

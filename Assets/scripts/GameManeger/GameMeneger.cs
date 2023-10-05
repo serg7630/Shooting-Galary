@@ -49,6 +49,8 @@ public class GameMeneger : MonoBehaviour
     [SerializeField] GameObject ButtomyJump;
 
     [SerializeField] PlayerControl PL;
+
+    [SerializeField] Slinshot Sling;
     
 
 
@@ -69,10 +71,10 @@ public class GameMeneger : MonoBehaviour
         _buttomExplosion = GameObject.Find("ButtonExplosion");
         //CoinMeheger.text = Coins.ToString();
         if(S==null)S = this;
-        
-        PauseOnStart = GameObject.Find("PauseOnStart");
-        if (PauseOnStart != null) PauseOnStart.SetActive(false);
 
+        //PauseOnStart = GameObject.Find("PauseOnStart");
+        //if (PauseOnStart != null) PauseOnStart.SetActive(false);
+        //PauseOnStarts();
 
 
         if (StaticValueShowAds.ShowAds == true)
@@ -89,7 +91,7 @@ public class GameMeneger : MonoBehaviour
 
         }
         print(SceneManager.GetActiveScene().name);
-        if (SceneManager.sceneCountInBuildSettings >= 2) LevelName.text = SceneManager.GetActiveScene().name;
+        if (SceneManager.sceneCountInBuildSettings >= 1) LevelName.text = SceneManager.GetActiveScene().name;
         
 
     }
@@ -103,7 +105,7 @@ public class GameMeneger : MonoBehaviour
 
 
         }
-        print(ValCoint);
+        //print(ValCoint);
         float coinsBar = ValCoint;
         _PanelBar.fillAmount = coinsBar / MaxScore;
     }
@@ -149,7 +151,7 @@ public class GameMeneger : MonoBehaviour
     public void GameFinish()
     {
         if (Time.timeScale != 1) Time.timeScale = 1;
-
+        if(FinishActive) return;
         //BagroundSource.Pause();
         Slinshot.S.aiming = false;
         Slinshot.S.stopControl();
@@ -159,6 +161,7 @@ public class GameMeneger : MonoBehaviour
         
         FinishActive = true;
         ActiveScene = SceneManager.GetActiveScene().name;
+
         LevelPlus(ActiveScene);
 
         //PlayerMove.S.HideMobileJoystic();
@@ -201,7 +204,7 @@ public class GameMeneger : MonoBehaviour
     //выход в меню уровней
     public void loadSceneLevels()
     {
-        LevelPlus(ActiveScene);
+        //LevelPlus(ActiveScene);
         if (Time.timeScale < 1) Time.timeScale = 1;
         SceneManager.LoadScene("LevelsMenu");
     }
@@ -213,11 +216,11 @@ public class GameMeneger : MonoBehaviour
         getLastLevel();
         AvailibleLevels = GetLevel;
         MaxScene = LevelMenu.MaxScene;
-        Debug.Log(MaxScene);
-        Debug.Log(ActiveScene);
-        Debug.Log(AvailibleLevels);
-        Debug.Log(GetLevel);
-        Debug.Log(LevelMenu.LevelAvaileble);
+        Debug.Log(MaxScene + "  max scene");
+        Debug.Log(ActiveScene + "  active scene");
+        Debug.Log(AvailibleLevels + "  доступная scene");
+        Debug.Log(GetLevel + "  получаемая scene");
+        Debug.Log(LevelMenu.LevelAvaileble + "  LevelMenu.LevelAvaileblee");
         if (ActiveScene == LevelMenu.MaxScene)
         {
             AvailibleLevels++;
@@ -282,10 +285,10 @@ public class GameMeneger : MonoBehaviour
 
     public void PauseOnStarts()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            return;
-        }
+        //if (SceneManager.GetActiveScene().buildIndex == 0)
+        //{
+        //    return;
+        //}
         
         Time.timeScale = 0f;
         //ShowAds();
@@ -296,10 +299,17 @@ public class GameMeneger : MonoBehaviour
             Invoke("PauseOnStarts", 0.5f);
             return;
         }
-        Debug.Log("pauseActive");
+        if (Sling==null)
+        {
+            Invoke("PauseOnStarts", 0.5f);
+            return;
+        }
+        Debug.Log("pauseOnStartActive");
         PauseOnStart.SetActive(true);
-        Slinshot.S.aiming = false;
-        Slinshot.S.stopControl();
+        Sling.aiming = false;
+        Sling.stopControl();
+        //Slinshot.S.aiming = false;
+        //Slinshot.S.stopControl();
 
         _buttomPauseUI.SetActive(false);
 
